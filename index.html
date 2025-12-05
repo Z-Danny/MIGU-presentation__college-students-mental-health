@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Famlée·伐木布蕾 | 高校心理服务数字化解决方案</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Prata&family=Nunito:wght@300;400;600;700&family=Quicksand:wght@400;600;700&family=Inter:wght@300;400;600;700;800;900&display=swap');
+        @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css');
         
         * {
             margin: 0;
@@ -130,15 +131,39 @@
         
         /* 排版 */
         .hero-title {
-            font-family: 'Noto Serif SC', serif;
             font-size: clamp(48px, 8vw, 96px);
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--color-lavender), var(--color-neon-blue), var(--color-mint));
+            line-height: 1.2;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        
+        .hero-title-en {
+            font-family: 'Prata', serif;
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #F9D423 0%, #FF4E50 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1.2;
-            margin-bottom: 24px;
+            text-shadow: 0 0 40px rgba(249, 212, 35, 0.3),
+                         0 0 20px rgba(255, 78, 80, 0.2);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+        
+        .hero-title-zh {
+            font-family: 'LXGW WenKai', 'STKaiti', 'KaiTi', serif;
+            font-weight: 500;
+            background: linear-gradient(135deg, #F9D423 0%, #FF4E50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(249, 212, 35, 0.3),
+                         0 0 20px rgba(255, 78, 80, 0.2);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
         }
         
         .section-title {
@@ -152,10 +177,12 @@
         }
         
         .subtitle {
+            font-family: 'Quicksand', 'Nunito', sans-serif;
             font-size: clamp(20px, 2.5vw, 32px);
-            font-weight: 300;
+            font-weight: 400;
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 32px;
+            letter-spacing: 2px;
         }
         
         .big-stat {
@@ -317,6 +344,196 @@
         .app-showcase {
             margin-top: 80px;
             position: relative;
+        }
+        
+        /* 3D卡片容器 */
+        .card-3d-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            padding: 80px 20px;
+            perspective: 2000px;
+            min-height: 600px;
+        }
+        
+        .card-3d-item {
+            position: relative;
+            width: 280px;
+            height: 520px;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            transform: translateX(0) rotateY(-35deg) scale(0.85);
+            opacity: 0.6;
+            filter: brightness(0.7);
+        }
+        
+        .card-3d-item:nth-child(2) {
+            transform: translateX(0) rotateY(-25deg) scale(0.9);
+            opacity: 0.75;
+            filter: brightness(0.8);
+        }
+        
+        .card-3d-item:nth-child(3),
+        .card-3d-item.active {
+            transform: translateX(0) rotateY(0deg) scale(1.1);
+            opacity: 1;
+            filter: brightness(1);
+            z-index: 10;
+        }
+        
+        .card-3d-item:nth-child(4) {
+            transform: translateX(0) rotateY(25deg) scale(0.9);
+            opacity: 0.75;
+            filter: brightness(0.8);
+        }
+        
+        .card-3d-item:nth-child(5) {
+            transform: translateX(0) rotateY(35deg) scale(0.85);
+            opacity: 0.6;
+            filter: brightness(0.7);
+        }
+        
+        .card-3d-item:hover {
+            transform: translateX(0) rotateY(0deg) scale(1.15) !important;
+            opacity: 1 !important;
+            filter: brightness(1) !important;
+            z-index: 20;
+        }
+        
+        .card-3d-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .card-3d-item.flipped .card-3d-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-3d-front,
+        .card-3d-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+        }
+        
+        .card-3d-front {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .card-3d-back {
+            background: rgba(15, 23, 42, 0.95);
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 24px;
+            backdrop-filter: blur(20px);
+        }
+        
+        .card-3d-front img,
+        .card-3d-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .card-3d-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.9), rgba(139, 92, 246, 0.9));
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .card-3d-detail {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
+            color: white;
+            text-align: center;
+        }
+        
+        .card-3d-detail h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--color-cream);
+        }
+        
+        .card-3d-detail p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        /* 人格详情卡片背面 */
+        .personality-detail {
+            text-align: center;
+            color: white;
+            padding: 32px 20px;
+        }
+        
+        .personality-avatar-small {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--color-lavender);
+            box-shadow: 0 10px 40px rgba(167, 139, 250, 0.5);
+        }
+        
+        .personality-avatar-small img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .personality-detail h4 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--color-cream), var(--color-mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .therapy-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(167, 139, 250, 0.2);
+            border: 1px solid var(--color-lavender);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-lavender);
+            margin-bottom: 16px;
+        }
+        
+        .personality-desc-detail {
+            font-size: 14px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
         }
         
         .screenshots-slider {
@@ -492,31 +709,229 @@
             font-size: 18px;
         }
         
-        /* 高校网格 */
-        .universities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 24px;
-            margin-top: 60px;
+        /* 高校滑动联动轮播 */
+        .university-showcase {
+            position: relative;
+            padding: 80px 0;
+            overflow: hidden;
         }
         
-        .university-logo {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 16px;
-            padding: 20px;
+        .university-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-top: -150px;
+            min-height: 50px;
+            transition: all 0.5s ease-in-out;
+            background: linear-gradient(135deg, #0EA5E9, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+        
+        .university-title.fade-out {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        
+        .university-title.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* IP形象展示区 */
+        .ip-display-area {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 1200px;
+            margin: 0 auto 40px;
+            perspective: 1000px;
+            padding-top: 200px;
+        }
+        
+        .ip-character {
+            position: absolute;
+            top: 200px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 200px);
             display: flex;
             align-items: center;
             justify-content: center;
-            aspect-ratio: 1;
-            transition: all 0.3s;
+            opacity: 0;
+            transform: scale(0.8) rotateY(30deg);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
         }
         
-        .university-logo:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 40px rgba(167, 139, 250, 0.5);
+        .ip-character.active {
+            opacity: 1;
+            transform: scale(1) rotateY(0deg);
+            z-index: 10;
         }
         
-        .university-logo img {
+        .ip-character img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3)) 
+                    drop-shadow(0 20px 60px rgba(167, 139, 250, 0.4));
+            /* 白色描边效果 */
+            -webkit-filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8)) 
+                           drop-shadow(0 0 20px rgba(167, 139, 250, 0.6))
+                           drop-shadow(0 20px 60px rgba(96, 165, 250, 0.4));
+        }
+        
+        /* 渐变镭射光晕 */
+        .ip-character::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: conic-gradient(
+                from 0deg,
+                rgba(167, 139, 250, 0.3),
+                rgba(96, 165, 250, 0.3),
+                rgba(110, 231, 183, 0.3),
+                rgba(252, 165, 165, 0.3),
+                rgba(167, 139, 250, 0.3)
+            );
+            filter: blur(40px);
+            opacity: 0;
+            transition: opacity 0.6s;
+            z-index: -1;
+            animation: rotate-gradient 8s linear infinite;
+        }
+        
+        .ip-character.active::before {
+            opacity: 0.6;
+        }
+        
+        @keyframes rotate-gradient {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* 校标圆圈布局 */
+        .logo-circle-container {
+            position: absolute;
+            width: 100%;
+            height: calc(100% - 200px);
+            top: 200px;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .logo-circle {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;
+        }
+        
+        .logo-card {
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: transparent;
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            opacity: 0.35;
+            filter: brightness(0.5);
+            left: 50%;
+            top: 50%;
+            transform-origin: center;
+        }
+        
+        .logo-card.active {
+            width: 180px;
+            height: 180px;
+            opacity: 1;
+            z-index: 10;
+            box-shadow: none;
+            filter: brightness(1.2);
+        }
+        
+        /* 聚光灯效果 */
+        .logo-card.active::before {
+            content: '';
+            position: absolute;
+            top: -600px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 700px;
+            background: linear-gradient(
+                to bottom,
+                rgba(249, 212, 35, 0) 0%,
+                rgba(249, 212, 35, 0.15) 30%,
+                rgba(255, 215, 0, 0.3) 60%,
+                rgba(255, 200, 50, 0.5) 85%,
+                rgba(255, 215, 0, 0.8) 100%
+            );
+            clip-path: polygon(
+                40% 0%, 
+                60% 0%, 
+                70% 100%, 
+                30% 100%
+            );
+            pointer-events: none;
+            z-index: -1;
+            animation: spotlight-glow 2s ease-in-out infinite;
+        }
+        
+        /* 聚光灯底部光晕 */
+        .logo-card.active::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle,
+                rgba(255, 215, 0, 0.4) 0%,
+                rgba(249, 212, 35, 0.2) 40%,
+                transparent 70%
+            );
+            pointer-events: none;
+            z-index: -1;
+            animation: halo-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes spotlight-glow {
+            0%, 100% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes halo-pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+        
+        .logo-card img {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -813,7 +1228,10 @@
     <section id="hero" class="section">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Famlée·伐木布蕾</h1>
+                <h1 class="hero-title">
+                    <span class="hero-title-en">Famlée</span>
+                    <span class="hero-title-zh">·伐木布蕾</span>
+                </h1>
                 <p class="subtitle">高校AI情绪陪伴与心理服务平台</p>
                 
                 <div class="hero-image">
@@ -822,10 +1240,10 @@
                 
                 <div style="margin-top: 60px;">
                     <p style="font-size: 24px; color: rgba(255,255,255,0.8); margin-bottom: 16px;">
-                        各位专家评审，今天我带来的不是一个心理App
+                        各位专家评审，今天我带来的不只是一个可为高校定制的心理健康h5
                     </p>
                     <p style="font-size: 28px; font-weight: 700; color: var(--color-cream);">
-                        而是一套<span class="highlight-gradient">可复制、能落地、学校愿意买单</span>的<br>
+                        更是一套<span class="highlight-gradient">可复制、能落地、学校愿意买单</span>的<br>
                         高校心理服务数字化解决方案
                     </p>
                 </div>
@@ -926,33 +1344,170 @@
                 </div>
             </div>
             
-            <!-- 应用功能展示 -->
+            <!-- 应用功能展示 - 颜色主题展示 -->
             <div class="app-showcase">
-                <h3 style="font-size: 32px; margin-bottom: 32px; text-align: center;">完整功能矩阵，真实可用</h3>
-                <div class="screenshots-slider">
-                    <div class="screenshot-item">
-                        <img src="网页移动端界面截图/首页.png" alt="首页">
+                <h3 style="font-size: 40px; margin-bottom: 16px; text-align: center; font-weight: 800; background: linear-gradient(135deg, var(--color-lavender), var(--color-neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎨 五彩情绪主题</h3>
+                <p style="text-align: center; font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 48px;">不同心情，不同色彩 · 让每一天都有专属配色</p>
+                
+                <div class="card-3d-container">
+                    <div class="card-3d-item" data-color="default">
+                        <div class="card-3d-inner">
+                            <div class="card-3d-front">
+                                <img src="网页移动端界面截图/首页-默认.jpg" alt="默认主题">
+                                <div class="card-3d-label">默认</div>
+                            </div>
+                            <div class="card-3d-back">
+                                <img src="网页移动端界面截图/情绪日历-默认.jpg" alt="默认主题日历">
+                                <div class="card-3d-detail">
+                                    <h4>默认主题</h4>
+                                    <p>温柔平和的日常陪伴</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <div class="card-3d-item" data-color="blue">
+                        <div class="card-3d-inner">
+                            <div class="card-3d-front">
+                                <img src="网页移动端界面截图/首页-蓝.jpg" alt="蓝色主题">
+                                <div class="card-3d-label" style="background: linear-gradient(135deg, #60A5FA, #3B82F6);">蓝色</div>
+                            </div>
+                            <div class="card-3d-back">
+                                <img src="网页移动端界面截图/情绪日历-蓝.jpg" alt="蓝色主题日历">
+                                <div class="card-3d-detail">
+                                    <h4>蓝色主题</h4>
+                                    <p>冷静理性的思考空间</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-3d-item active" data-color="purple">
+                        <div class="card-3d-inner">
+                            <div class="card-3d-front">
+                                <img src="网页移动端界面截图/首页-紫.jpg" alt="紫色主题">
+                                <div class="card-3d-label" style="background: linear-gradient(135deg, #A78BFA, #8B5CF6);">紫色</div>
+                            </div>
+                            <div class="card-3d-back">
+                                <img src="网页移动端界面截图/情绪日历-紫.jpg" alt="紫色主题日历">
+                                <div class="card-3d-detail">
+                                    <h4>紫色主题</h4>
+                                    <p>神秘浪漫的情绪世界</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-3d-item" data-color="yellow">
+                        <div class="card-3d-inner">
+                            <div class="card-3d-front">
+                                <img src="网页移动端界面截图/首页-黄.jpg" alt="黄色主题">
+                                <div class="card-3d-label" style="background: linear-gradient(135deg, #FDE68A, #FBBF24);">黄色</div>
+                            </div>
+                            <div class="card-3d-back">
+                                <img src="网页移动端界面截图/情绪日历-黄.jpg" alt="黄色主题日历">
+                                <div class="card-3d-detail">
+                                    <h4>黄色主题</h4>
+                                    <p>温暖活力的能量补给</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-3d-item" data-color="red">
+                        <div class="card-3d-inner">
+                            <div class="card-3d-front">
+                                <img src="网页移动端界面截图/首页-红.jpg" alt="红色主题">
+                                <div class="card-3d-label" style="background: linear-gradient(135deg, #FCA5A5, #EF4444);">红色</div>
+                            </div>
+                            <div class="card-3d-back">
+                                <img src="网页移动端界面截图/情绪日历-红.jpg" alt="红色主题日历">
+                                <div class="card-3d-detail">
+                                    <h4>红色主题</h4>
+                                    <p>热情奔放的情感释放</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI人格系统展示 -->
+                <h3 style="font-size: 40px; margin: 120px 0 16px; text-align: center; font-weight: 800; background: linear-gradient(135deg, var(--color-pink), var(--color-cream)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🤖 AI三人格陪伴</h3>
+                <p style="text-align: center; font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 48px;">不同性格，不同疗法 · 千人千面的情绪支持</p>
+                
+                <div class="card-3d-container">
+                    <div class="card-3d-item" data-personality="melty">
+                        <div class="card-3d-inner">
+                            <div class="card-3d-front">
+                                <img src="网页移动端界面截图/首页-治愈系人格.jpg" alt="治愈系人格">
+                                <div class="card-3d-label" style="background: linear-gradient(135deg, #FCA5A5, #FB7185);">Melty 治愈系</div>
+                            </div>
+                            <div class="card-3d-back">
+                                <div class="personality-detail">
+                                    <div class="personality-avatar-small">
+                                        <img src="项目示例高校北邮形象图集/形象大头表情包/委屈.png" alt="Melty">
+                                    </div>
+                                    <h4>Melty 治愈系</h4>
+                                    <p class="therapy-tag">ACT接纳承诺疗法</p>
+                                    <p class="personality-desc-detail">温柔共情，正念呼吸，情绪接纳<br>像温暖的阳光般陪伴你</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-3d-item active" data-personality="logic">
+                        <div class="card-3d-inner">
+                            <div class="card-3d-front">
+                                <img src="网页移动端界面截图/首页-逻辑系人格.jpg" alt="逻辑系人格">
+                                <div class="card-3d-label" style="background: linear-gradient(135deg, #60A5FA, #3B82F6);">Logic 理性系</div>
+                            </div>
+                            <div class="card-3d-back">
+                                <div class="personality-detail">
+                                    <div class="personality-avatar-small">
+                                        <img src="项目示例高校北邮形象图集/形象大头表情包/惊讶.png" alt="Logic">
+                                    </div>
+                                    <h4>Logic 理性系</h4>
+                                    <p class="therapy-tag">CBT认知行为疗法</p>
+                                    <p class="personality-desc-detail">认知重构，逻辑分析，逆向思考<br>用理性化解情绪困扰</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-3d-item" data-personality="spark">
+                        <div class="card-3d-inner">
+                            <div class="card-3d-front">
+                                <img src="网页移动端界面截图/首页-趣味系人格.jpg" alt="趣味系人格">
+                                <div class="card-3d-label" style="background: linear-gradient(135deg, #FDE68A, #FBBF24);">Spark 趣味系</div>
+                            </div>
+                            <div class="card-3d-back">
+                                <div class="personality-detail">
+                                    <div class="personality-avatar-small">
+                                        <img src="项目示例高校北邮形象图集/形象大头表情包/生气.png" alt="Spark">
+                                    </div>
+                                    <h4>Spark 趣味系</h4>
+                                    <p class="therapy-tag">幽默解构疗法</p>
+                                    <p class="personality-desc-detail">MBTI速测，毒舌锐评，轻松幽默<br>用笑声赶走阴霾</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 其他功能页面展示 -->
+                <h3 style="font-size: 32px; margin: 120px 0 32px; text-align: center;">完整功能矩阵，真实可用</h3>
+                <div class="screenshots-slider">
                     <div class="screenshot-item">
                         <img src="网页移动端界面截图/首页记录情绪页.png" alt="情绪记录">
                     </div>
                     <div class="screenshot-item">
-                        <img src="网页移动端界面截图/情绪日历页.png" alt="情绪日历">
+                        <img src="网页移动端界面截图/大声哔哔-匿名发布内容.jpg" alt="匿名发布">
                     </div>
                     <div class="screenshot-item">
-                        <img src="网页移动端界面截图/大声哔哔匿名树洞.png" alt="匿名树洞">
+                        <img src="网页移动端界面截图/大声哔哔-查看别人的内容.jpg" alt="查看树洞">
                     </div>
                     <div class="screenshot-item">
-                        <img src="网页移动端界面截图/大声哔哔查看别人的树洞.png" alt="树洞详情">
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="网页移动端界面截图/大声哔哔投递页面.png" alt="投递树洞">
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="网页移动端界面截图/校园心理活动展示.png" alt="心理活动">
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="网页移动端界面截图/校园心理活动报名.png" alt="活动报名">
+                        <img src="网页移动端界面截图/布告栏活动.jpg" alt="布告栏活动">
                     </div>
                 </div>
             </div>
@@ -1109,44 +1664,91 @@
             <h2 class="section-title">一套方案，适配全国高校</h2>
             <p class="subtitle">每所高校，都能拥有自己的"校园心理守护者"</p>
             
-            <!-- 高校校徽网格 -->
-            <div class="universities-grid">
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/北邮校徽.png" alt="北京邮电大学">
+            <!-- 高校IP滑动联动展示 -->
+            <div class="university-showcase">
+                <!-- IP形象展示区 -->
+                <div class="ip-display-area">
+                    <div class="ip-character active" data-university="北京邮电大学">
+                        <img src="高校AI 生成的ip展示图集/北邮.png" alt="北京邮电大学IP形象">
+                    </div>
+                    <div class="ip-character" data-university="北京大学">
+                        <img src="高校AI 生成的ip展示图集/北大.png" alt="北京大学IP形象">
+                    </div>
+                    <div class="ip-character" data-university="中山大学">
+                        <img src="高校AI 生成的ip展示图集/中山大学.png" alt="中山大学IP形象">
+                    </div>
+                    <div class="ip-character" data-university="华中科技大学">
+                        <img src="高校AI 生成的ip展示图集/华中科技大学.png" alt="华中科技大学IP形象">
+                    </div>
+                    <div class="ip-character" data-university="南京大学">
+                        <img src="高校AI 生成的ip展示图集/南京大学.png" alt="南京大学IP形象">
+                    </div>
+                    <div class="ip-character" data-university="哈尔滨工业大学">
+                        <img src="高校AI 生成的ip展示图集/哈工大.png" alt="哈尔滨工业大学IP形象">
+                    </div>
+                    <div class="ip-character" data-university="香港大学">
+                        <img src="高校AI 生成的ip展示图集/香港大学.png" alt="香港大学IP形象">
+                    </div>
+                    <div class="ip-character" data-university="香港中文大学">
+                        <img src="高校AI 生成的ip展示图集/香港中文大学.png" alt="香港中文大学IP形象">
+                    </div>
+                    <div class="ip-character" data-university="中国农业大学">
+                        <img src="高校AI 生成的ip展示图集/中国农大.png" alt="中国农业大学IP形象">
+                    </div>
+                    <div class="ip-character" data-university="中国人民大学">
+                        <img src="高校AI 生成的ip展示图集/中国人大.png" alt="中国人民大学IP形象">
+                    </div>
+                    <div class="ip-character" data-university="大连理工大学">
+                        <img src="高校AI 生成的ip展示图集/大连理工.png" alt="大连理工大学IP形象">
+                    </div>
+                    <div class="ip-character" data-university="广西师范大学">
+                        <img src="高校AI 生成的ip展示图集/广西师范大学.png" alt="广西师范大学IP形象">
+                    </div>
+                    
+                    <!-- 校标圆圈布局（环绕在IP外） -->
+                    <div class="logo-circle-container">
+                    <div class="logo-circle" id="logoCircle">
+                        <div class="logo-card active" data-index="0" data-university="北京邮电大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/北邮.png" alt="北京邮电大学">
+                        </div>
+                        <div class="logo-card" data-index="1" data-university="北京大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/北大.png" alt="北京大学">
+                        </div>
+                        <div class="logo-card" data-index="2" data-university="中山大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/中山大学.png" alt="中山大学">
+                        </div>
+                        <div class="logo-card" data-index="3" data-university="华中科技大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/华中科技大学.png" alt="华中科技大学">
+                        </div>
+                        <div class="logo-card" data-index="4" data-university="南京大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/南京大学.png" alt="南京大学">
+                        </div>
+                        <div class="logo-card" data-index="5" data-university="哈尔滨工业大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/哈工大.png" alt="哈尔滨工业大学">
+                        </div>
+                        <div class="logo-card" data-index="6" data-university="香港大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/香港大学.png" alt="香港大学">
+                        </div>
+                        <div class="logo-card" data-index="7" data-university="香港中文大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/香港中文大学.png" alt="香港中文大学">
+                        </div>
+                        <div class="logo-card" data-index="8" data-university="中国农业大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/中国农大.png" alt="中国农业大学">
+                        </div>
+                        <div class="logo-card" data-index="9" data-university="中国人民大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/中国人大.png" alt="中国人民大学">
+                        </div>
+                        <div class="logo-card" data-index="10" data-university="大连理工大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/大连理工.png" alt="大连理工大学">
+                        </div>
+                        <div class="logo-card" data-index="11" data-university="广西师范大学">
+                            <img src="高校AI 生成的ip展示图集/高校校标png图集/广西师范大学.png" alt="广西师范大学">
+                        </div>
+                    </div>
                 </div>
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/浙江大学.png" alt="浙江大学">
-                </div>
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/武汉大学.png" alt="武汉大学">
-                </div>
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/南京大学.png" alt="南京大学">
-                </div>
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/中山大学.png" alt="中山大学">
-                </div>
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/华中科技大学.png" alt="华中科技大学">
-                </div>
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/中国人大.png" alt="中国人民大学">
-                </div>
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/中国农大.png" alt="中国农业大学">
-                </div>
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/哈工大.png" alt="哈尔滨工业大学">
-                </div>
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/大连理工.png" alt="大连理工大学">
-                </div>
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/四川大学.png" alt="四川大学">
-                </div>
-                <div class="university-logo">
-                    <img src="高校AI 生成的ip展示图集/高校校标png图集/云南大学.png" alt="云南大学">
-                </div>
+                
+                <!-- 大学名称标题（放在IP形象下方） -->
+                <h3 class="university-title fade-in" id="universityTitle">北京邮电大学</h3>
             </div>
             
             <div style="margin-top: 80px;">
@@ -1175,36 +1777,7 @@
                 </div>
             </div>
             
-            <!-- AI生成的IP形象展示 -->
-            <div style="margin-top: 80px;">
-                <h3 style="font-size: 32px; text-align: center; margin-bottom: 40px;">AI批量生成不同高校IP形象</h3>
-                <div class="ip-gallery">
-                    <div class="ip-item">
-                        <img src="高校AI 生成的ip展示图集/jimeng-2025-11-27-1060.png" alt="IP形象1">
-                    </div>
-                    <div class="ip-item">
-                        <img src="高校AI 生成的ip展示图集/jimeng-2025-11-27-1357.png" alt="IP形象2">
-                    </div>
-                    <div class="ip-item">
-                        <img src="高校AI 生成的ip展示图集/jimeng-2025-11-27-2721.png" alt="IP形象3">
-                    </div>
-                    <div class="ip-item">
-                        <img src="高校AI 生成的ip展示图集/jimeng-2025-11-27-2723.png" alt="IP形象4">
-                    </div>
-                    <div class="ip-item">
-                        <img src="高校AI 生成的ip展示图集/jimeng-2025-11-27-3070.png" alt="IP形象5">
-                    </div>
-                    <div class="ip-item">
-                        <img src="高校AI 生成的ip展示图集/jimeng-2025-11-27-4127.png" alt="IP形象6">
-                    </div>
-                    <div class="ip-item">
-                        <img src="高校AI 生成的ip展示图集/jimeng-2025-11-27-4284.png" alt="IP形象7">
-                    </div>
-                    <div class="ip-item">
-                        <img src="高校AI 生成的ip展示图集/jimeng-2025-11-27-5479.png" alt="IP形象8">
-                    </div>
-                </div>
-            </div>
+
         </div>
     </section>
     
@@ -1233,10 +1806,10 @@
                     </p>
                     
                     <ul class="case-highlights">
-                        <li>基于校徽、校色自动生成IP形象</li>
+                        <li>基于校徽、校色自动定制高校系列IP形象</li>
                         <li>支持多种风格和情绪表情</li>
-                        <li>一键生成文创周边效果图</li>
-                        <li>从设计到落地，周期缩短至3天</li>
+                        <li>一键生成服装、表情、动作、多视角效果图</li>
+                        <li>强可复制性</li>
                     </ul>
                 </div>
             </div>
@@ -1470,6 +2043,212 @@
             parallaxElements.forEach((el, i) => {
                 const speed = 0.5 + (i * 0.1);
                 el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+        
+        // 3D卡片翻转交互
+        document.addEventListener('DOMContentLoaded', () => {
+            const cardItems = document.querySelectorAll('.card-3d-item');
+            
+            cardItems.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // 如果已经翻转，再次点击则翻回正面
+                    if (this.classList.contains('flipped')) {
+                        this.classList.remove('flipped');
+                    } else {
+                        // 翻转到背面
+                        this.classList.add('flipped');
+                        
+                        // 3秒后自动翻回
+                        setTimeout(() => {
+                            this.classList.remove('flipped');
+                        }, 3000);
+                    }
+                });
+                
+                // 鼠标悬停效果增强
+                card.addEventListener('mouseenter', function() {
+                    // 移除其他卡片的 active 状态
+                    cardItems.forEach(c => {
+                        if (c !== this && !c.classList.contains('flipped')) {
+                            c.classList.remove('active');
+                        }
+                    });
+                    
+                    // 添加当前卡片的 active 状态
+                    if (!this.classList.contains('flipped')) {
+                        this.classList.add('active');
+                    }
+                });
+            });
+            
+            // 为每个卡片容器添加导航功能
+            const containers = document.querySelectorAll('.card-3d-container');
+            containers.forEach(container => {
+                const cards = container.querySelectorAll('.card-3d-item');
+                let currentIndex = 2; // 默认第3张卡片为中心
+                
+                // 键盘导航（左右箭头）
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') {
+                        currentIndex = Math.max(0, currentIndex - 1);
+                        updateActiveCard(cards, currentIndex);
+                    } else if (e.key === 'ArrowRight') {
+                        currentIndex = Math.min(cards.length - 1, currentIndex + 1);
+                        updateActiveCard(cards, currentIndex);
+                    }
+                });
+            });
+            
+            function updateActiveCard(cards, index) {
+                cards.forEach((card, i) => {
+                    card.classList.remove('active');
+                    if (i === index) {
+                        card.classList.add('active');
+                    }
+                });
+            }
+        });
+        
+        // 高校圆圈轮播交互
+        document.addEventListener('DOMContentLoaded', () => {
+            const logoCircle = document.getElementById('logoCircle');
+            const logoCards = document.querySelectorAll('.logo-card');
+            const ipCharacters = document.querySelectorAll('.ip-character');
+            const universityTitle = document.getElementById('universityTitle');
+            
+            let currentIndex = 0;
+            let isAutoplay = true;
+            let autoplayInterval;
+            const totalCards = logoCards.length;
+            const radius = 480; // 圆的半径，环绕在IP形象外（扩大1.5倍）
+            
+            // 初始化圆圈布局
+            function initCircleLayout() {
+                logoCards.forEach((card, i) => {
+                    updateCardPosition(card, i);
+                });
+            }
+            
+            // 更新卡片位置
+            function updateCardPosition(card, index) {
+                const angle = (360 / totalCards) * index - 90; // -90度让第一个卡片在顶部
+                const angleRad = (angle * Math.PI) / 180;
+                const x = Math.cos(angleRad) * radius;
+                const y = Math.sin(angleRad) * radius;
+                
+                card.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+            }
+            
+            // 旋转圆圈
+            function rotateCircle() {
+                logoCards.forEach((card, i) => {
+                    const relativeIndex = (i - currentIndex + totalCards) % totalCards;
+                    const angle = (360 / totalCards) * relativeIndex - 90;
+                    const angleRad = (angle * Math.PI) / 180;
+                    const x = Math.cos(angleRad) * radius;
+                    const y = Math.sin(angleRad) * radius;
+                    
+                    card.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+                });
+            }
+            
+            // 切换到指定索引
+            function switchToIndex(index) {
+                if (index < 0 || index >= logoCards.length) return;
+                
+                currentIndex = index;
+                const university = logoCards[index].getAttribute('data-university');
+                
+                // 更新标题（淡出淡入）
+                universityTitle.classList.remove('fade-in');
+                universityTitle.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    universityTitle.textContent = university;
+                    universityTitle.classList.remove('fade-out');
+                    universityTitle.classList.add('fade-in');
+                }, 250);
+                
+                // 更新校标卡片激活状态
+                logoCards.forEach((card, i) => {
+                    if (i === index) {
+                        card.classList.add('active');
+                    } else {
+                        card.classList.remove('active');
+                    }
+                });
+                
+                // 更新IP形象显示
+                ipCharacters.forEach(char => {
+                    if (char.getAttribute('data-university') === university) {
+                        char.classList.add('active');
+                    } else {
+                        char.classList.remove('active');
+                    }
+                });
+                
+                // 旋转圆圈
+                rotateCircle();
+            }
+            
+            // 后一个
+            function nextUniversity() {
+                const newIndex = (currentIndex + 1) % logoCards.length;
+                switchToIndex(newIndex);
+            }
+            
+            // 校标卡片点击事件
+            logoCards.forEach((card, index) => {
+                card.addEventListener('click', () => {
+                    switchToIndex(index);
+                    resetAutoplay();
+                });
+            });
+            
+            // 自动播放
+            function startAutoplay() {
+                stopAutoplay();
+                autoplayInterval = setInterval(() => {
+                    nextUniversity();
+                }, 2000);
+            }
+            
+            function stopAutoplay() {
+                if (autoplayInterval) {
+                    clearInterval(autoplayInterval);
+                    autoplayInterval = null;
+                }
+            }
+            
+            function resetAutoplay() {
+                if (isAutoplay) {
+                    startAutoplay();
+                }
+            }
+            
+            // 键盘导航
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                    nextUniversity();
+                    resetAutoplay();
+                }
+            });
+            
+            // 初始化
+            initCircleLayout();
+            switchToIndex(0);
+            if (isAutoplay) {
+                startAutoplay();
+            }
+            
+            // 页面可见性变化时控制自动播放
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    stopAutoplay();
+                } else if (isAutoplay) {
+                    startAutoplay();
+                }
             });
         });
     </script>
