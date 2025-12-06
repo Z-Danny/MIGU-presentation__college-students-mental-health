@@ -204,6 +204,37 @@
             animation-delay: 0.3s;
         }
         
+        /* Hero IP形象 */
+        .hero-ip-image {
+            max-width: 400px;
+            margin: 0 auto 40px;
+            opacity: 0;
+            animation: fadeInScale 1.5s forwards;
+            animation-delay: 0s;
+        }
+        
+        .ip-mascot {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 60px rgba(167, 139, 250, 0.6));
+            transition: transform 0.3s ease;
+        }
+        
+        .ip-mascot:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
         .hero-image {
             max-width: 400px;
             margin: 60px auto 40px;
@@ -1476,6 +1507,11 @@
         @media (max-width: 1024px) {
             .section {
                 padding: 60px 40px;
+            }
+            
+            .hero-ip-image {
+                max-width: 280px;
+                margin-bottom: 30px;
             }
             
             .nfc-section,
@@ -3644,6 +3680,11 @@
     <section id="hero" class="section">
         <div class="container">
             <div class="hero-content">
+                <!-- 默认IP形象 -->
+                <div class="hero-ip-image">
+                    <img src="默认 ip.png" alt="Famlée IP形象" class="ip-mascot">
+                </div>
+                
                 <h1 class="hero-title">
                     <span class="hero-title-en">Famlée</span>
                     <span class="hero-title-zh">·伐木布蕾</span>
