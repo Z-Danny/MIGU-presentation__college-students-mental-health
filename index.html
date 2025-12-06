@@ -681,6 +681,159 @@
             color: rgba(255, 255, 255, 0.7);
         }
         
+        /* 高校管理后台板块 */
+        #admin-dashboard {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        .admin-dashboard-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Bento Grid 布局 */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+        
+        .bento-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        
+        .bento-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .bento-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(167, 139, 250, 0.3);
+        }
+        
+        .bento-card.large {
+            grid-column: span 8;
+        }
+        
+        .bento-card.medium {
+            grid-column: span 6;
+        }
+        
+        .bento-card.small {
+            grid-column: span 4;
+        }
+        
+        .bento-card.full {
+            grid-column: span 12;
+        }
+        
+        .bento-card-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--color-cream), var(--color-mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .bento-card-desc {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+        }
+        
+        .bento-card-image {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease;
+        }
+        
+        .bento-card:hover .bento-card-image {
+            transform: scale(1.02);
+        }
+        
+        .bento-card-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .bento-card-images-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .highlight-stat {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-cream);
+            padding: 8px 16px;
+            background: rgba(253, 230, 138, 0.1);
+            border-radius: 8px;
+            margin: 8px 4px;
+        }
+        
+        .counter-number {
+            display: inline-block;
+        }
+        
+        /* 视频演示区 */
+        .demo-video-section {
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .demo-video-container-admin {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 40px auto 0;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(167, 139, 250, 0.6);
+            background: #000;
+        }
+        
+        .demo-video-container-admin video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 1024px) {
+            .bento-card.large,
+            .bento-card.medium,
+            .bento-card.small {
+                grid-column: span 12;
+            }
+            
+            .bento-card-images-group {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         /* B2B2C双端价值 */
         .value-split {
             display: grid;
@@ -1617,6 +1770,104 @@
         </div>
     </section>
     
+    <!-- 5.5. 高校管理后台展示 -->
+    <section id="admin-dashboard" class="section">
+        <div class="container admin-dashboard-content">
+            <h2 class="section-title">高校管理端：看不见的心理守护，看得见的数据洞察</h2>
+            <p class="subtitle">为高校提供全方位的心理健康监测、预警与干预工具，让心理工作数字化、可视化</p>
+            
+            <!-- Bento Grid 布局 -->
+            <div class="bento-grid">
+                <!-- 第一组：专属管理门户 - 8列 + 4列 -->
+                <div class="bento-card small" data-aos="fade-up" data-aos-delay="0">
+                    <h3 class="bento-card-title">专属管理门户</h3>
+                    <p class="bento-card-desc">
+                        独立部署的高校管理端，支持权限分级。一屏掌握全校心理健康大盘，实时监控用户活跃度与情绪分布。
+                    </p>
+                    <div class="bento-card-image">
+                        <img src="高校 管理员后台/管理员登录页.png" alt="管理员登录页">
+                    </div>
+                </div>
+                
+                <div class="bento-card large" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="bento-card-title">全局概览看板</h3>
+                    <p class="bento-card-desc">
+                        实时数据大屏，清晰呈现总对话数、情绪分布、活跃用户等核心指标。
+                    </p>
+                    <div class="bento-card-image">
+                        <img src="高校 管理员后台/数据统计看板.png" alt="数据统计看板">
+                    </div>
+                </div>
+                
+                <!-- 第二组：深度行为洞察 - 全宽 -->
+                <div class="bento-card full" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="bento-card-title">多维数据分析体系</h3>
+                    <p class="bento-card-desc">
+                        从"对话时长"到"情绪转化率"，深度量化心理服务效果。<br>
+                        <span class="highlight-stat">
+                            亮点数据：焦虑转平和成功率达 <span class="counter-number" data-target="73.8">0</span>%
+                        </span>
+                        <span class="highlight-stat">
+                            CBT/ACT疗法使用占比清晰可见
+                        </span>
+                    </p>
+                    <div class="bento-card-images-group">
+                        <div class="bento-card-image">
+                            <img src="高校 管理员后台/数据分析页1.png" alt="数据分析页1 - 日记总数与人格偏好">
+                        </div>
+                        <div class="bento-card-image">
+                            <img src="高校 管理员后台/数据分析页2.png" alt="数据分析页2 - 情绪转化分析">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 第三组：校园活动发布 - 6列 + 6列 -->
+                <div class="bento-card medium" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bento-card-image">
+                        <img src="高校 管理员后台/活动内容发布.png" alt="活动内容发布">
+                    </div>
+                </div>
+                
+                <div class="bento-card medium" data-aos="fade-up" data-aos-delay="350">
+                    <h3 class="bento-card-title">心理活动一键发布</h3>
+                    <p class="bento-card-desc">
+                        打破信息差。学校可直接通过后台发布讲座、团辅、工作坊，信息直达学生端 App 的"布告栏"，实现线上线下的服务闭环。
+                    </p>
+                    <ul style="list-style: none; padding: 0; margin-top: 24px;">
+                        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 16px; color: rgba(255,255,255,0.8);">
+                            ✓ 活动标题、时间、地点快速设置
+                        </li>
+                        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 16px; color: rgba(255,255,255,0.8);">
+                            ✓ 支持图片、海报上传
+                        </li>
+                        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 16px; color: rgba(255,255,255,0.8);">
+                            ✓ 学生端实时同步显示
+                        </li>
+                        <li style="padding: 12px 0; font-size: 16px; color: rgba(255,255,255,0.8);">
+                            ✓ 报名人数实时统计
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 视频演示区域 -->
+            <div class="demo-video-section" data-aos="fade-up" data-aos-delay="400">
+                <h3 style="font-size: 32px; margin-bottom: 16px; background: linear-gradient(135deg, var(--color-lavender), var(--color-neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    管理后台真实操作演示
+                </h3>
+                <p style="font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 40px;">
+                    完整展示从数据查看到活动发布的全流程操作
+                </p>
+                <div class="demo-video-container-admin">
+                    <video controls muted playsinline>
+                        <source src="高校 管理员后台/后台演示视频.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- 6. 商业模式 -->
     <section id="business" class="section">
         <div class="container">
@@ -2250,6 +2501,65 @@
                     startAutoplay();
                 }
             });
+        });
+        
+        // 管理后台板块 - 滚动视差动画
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for fade-up animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const animateOnScroll = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            // 观察所有 bento-card
+            const bentoCards = document.querySelectorAll('.bento-card');
+            bentoCards.forEach(card => {
+                animateOnScroll.observe(card);
+            });
+            
+            // 数字滚动效果
+            const counterNumbers = document.querySelectorAll('.counter-number');
+            let hasAnimated = false;
+            
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasAnimated) {
+                        hasAnimated = true;
+                        animateCounters();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counterNumbers.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+            
+            function animateCounters() {
+                counterNumbers.forEach(counter => {
+                    const target = parseFloat(counter.getAttribute('data-target'));
+                    const duration = 2000; // 2秒
+                    const step = target / (duration / 16); // 60fps
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) {
+                            counter.textContent = target.toFixed(1);
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = current.toFixed(1);
+                        }
+                    }, 16);
+                });
+            }
         });
     </script>
 </body>
