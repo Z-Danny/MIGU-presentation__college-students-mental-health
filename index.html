@@ -142,27 +142,27 @@
         
         .hero-title-en {
             font-family: 'Prata', serif;
-            font-style: italic;
+            font-style: normal;
             font-weight: 400;
             letter-spacing: 3px;
-            background: linear-gradient(135deg, #F9D423 0%, #FF4E50 100%);
+            background: linear-gradient(135deg, #FEE140 0%, #FA709A 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 40px rgba(249, 212, 35, 0.3),
-                         0 0 20px rgba(255, 78, 80, 0.2);
+            text-shadow: 0 0 40px rgba(254, 225, 64, 0.3),
+                         0 0 20px rgba(250, 112, 154, 0.2);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
         }
         
         .hero-title-zh {
             font-family: 'LXGW WenKai', 'STKaiti', 'KaiTi', serif;
             font-weight: 500;
-            background: linear-gradient(135deg, #F9D423 0%, #FF4E50 100%);
+            background: linear-gradient(135deg, #FEE140 0%, #FA709A 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 40px rgba(249, 212, 35, 0.3),
-                         0 0 20px rgba(255, 78, 80, 0.2);
+            text-shadow: 0 0 40px rgba(254, 225, 64, 0.3),
+                         0 0 20px rgba(250, 112, 154, 0.2);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
         }
         
@@ -216,6 +216,150 @@
             width: 100%;
             height: auto;
             filter: drop-shadow(0 20px 60px rgba(167, 139, 250, 0.6));
+        }
+        
+        /* 在线体验模块 - Glassmorphism浏览器栏 */
+        .online-experience {
+            margin: 48px auto 60px;
+            max-width: 600px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 1.2s forwards;
+            animation-delay: 1.2s;
+        }
+        
+        .online-hint {
+            font-size: 15px;
+            color: #94A3B8;
+            margin-bottom: 20px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .browser-bar {
+            position: relative;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50px;
+            padding: 4px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        
+        .browser-bar:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(167, 139, 250, 0.5);
+            box-shadow: 
+                0 8px 32px rgba(167, 139, 250, 0.4),
+                0 0 0 4px rgba(167, 139, 250, 0.1);
+        }
+        
+        .browser-bar-inner {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 46px;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .lock-icon-svg {
+            color: #A78BFA;
+            flex-shrink: 0;
+        }
+        
+        .url-text {
+            flex: 1;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            font-weight: 500;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .go-button {
+            background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+        
+        .browser-bar:hover .go-button {
+            transform: translateX(4px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+        }
+        
+        .go-button svg {
+            transition: transform 0.3s ease;
+        }
+        
+        .browser-bar:hover .go-button svg {
+            transform: translateX(3px);
+        }
+        
+        /* 光晕效果 */
+        .glow-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.4) 0%, transparent 70%);
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: all 0.5s ease;
+            pointer-events: none;
+            z-index: 1;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.6;
+            }
+        }
+        
+        .browser-bar:hover .glow-effect {
+            transform: translate(-50%, -50%) scale(1.5);
+            opacity: 0.8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .online-experience {
+                margin: 32px 20px 40px;
+            }
+            
+            .url-text {
+                font-size: 13px;
+            }
+            
+            .go-button {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
         }
         
         .scroll-indicator {
@@ -681,159 +825,6 @@
             color: rgba(255, 255, 255, 0.7);
         }
         
-        /* 高校管理后台板块 */
-        #admin-dashboard {
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(10px);
-        }
-        
-        .admin-dashboard-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        /* Bento Grid 布局 */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 24px;
-            margin-top: 60px;
-        }
-        
-        .bento-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            transform: translateY(40px);
-        }
-        
-        .bento-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .bento-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(167, 139, 250, 0.3);
-        }
-        
-        .bento-card.large {
-            grid-column: span 8;
-        }
-        
-        .bento-card.medium {
-            grid-column: span 6;
-        }
-        
-        .bento-card.small {
-            grid-column: span 4;
-        }
-        
-        .bento-card.full {
-            grid-column: span 12;
-        }
-        
-        .bento-card-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--color-cream), var(--color-mint));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .bento-card-desc {
-            font-size: 16px;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 24px;
-        }
-        
-        .bento-card-image {
-            width: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-top: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            transition: transform 0.4s ease;
-        }
-        
-        .bento-card:hover .bento-card-image {
-            transform: scale(1.02);
-        }
-        
-        .bento-card-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .bento-card-images-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 20px;
-        }
-        
-        .highlight-stat {
-            display: inline-block;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--color-cream);
-            padding: 8px 16px;
-            background: rgba(253, 230, 138, 0.1);
-            border-radius: 8px;
-            margin: 8px 4px;
-        }
-        
-        .counter-number {
-            display: inline-block;
-        }
-        
-        /* 视频演示区 */
-        .demo-video-section {
-            margin-top: 60px;
-            text-align: center;
-        }
-        
-        .demo-video-container-admin {
-            position: relative;
-            width: 100%;
-            max-width: 1200px;
-            margin: 40px auto 0;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 80px rgba(167, 139, 250, 0.6);
-            background: #000;
-        }
-        
-        .demo-video-container-admin video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        /* 响应式调整 */
-        @media (max-width: 1024px) {
-            .bento-card.large,
-            .bento-card.medium,
-            .bento-card.small {
-                grid-column: span 12;
-            }
-            
-            .bento-card-images-group {
-                grid-template-columns: 1fr;
-            }
-        }
-        
         /* B2B2C双端价值 */
         .value-split {
             display: grid;
@@ -871,16 +862,20 @@
         
         .university-title {
             text-align: center;
-            font-size: 36px;
+            font-size: 42px;
             font-weight: 700;
             margin-top: -150px;
+            margin-bottom: 180px;
             min-height: 50px;
-            transition: all 0.5s ease-in-out;
-            background: linear-gradient(135deg, #0EA5E9, #8B5CF6);
+            background: linear-gradient(135deg, #F9D423, #FF4E50);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 1px;
+            text-shadow: 
+                0 0 20px rgba(249, 212, 35, 0.3),
+                0 0 40px rgba(255, 78, 80, 0.2);
+            transition: all 0.5s ease-in-out;
+            position: relative;
+            z-index: 5;
         }
         
         .university-title.fade-out {
@@ -898,18 +893,17 @@
             position: relative;
             width: 100%;
             max-width: 600px;
-            height: 1200px;
+            height: 600px;
             margin: 0 auto 40px;
             perspective: 1000px;
-            padding-top: 200px;
         }
         
         .ip-character {
             position: absolute;
-            top: 200px;
+            top: 0;
             left: 0;
             width: 100%;
-            height: calc(100% - 200px);
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -974,8 +968,8 @@
         .logo-circle-container {
             position: absolute;
             width: 100%;
-            height: calc(100% - 200px);
-            top: 200px;
+            height: 100%;
+            top: 0;
             left: 0;
             pointer-events: none;
         }
@@ -989,9 +983,9 @@
         
         .logo-card {
             position: absolute;
-            width: 130px;
-            height: 130px;
-            background: transparent;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             padding: 16px;
             display: flex;
@@ -1000,88 +994,89 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-            opacity: 0.35;
-            filter: brightness(0.5);
+            opacity: 0.4;
+            filter: brightness(0.6);
             left: 50%;
             top: 50%;
             transform-origin: center;
+            overflow: visible;
         }
         
-        .logo-card.active {
-            width: 180px;
-            height: 180px;
-            opacity: 1;
-            z-index: 10;
-            box-shadow: none;
-            filter: brightness(1.2);
-        }
-        
-        /* 聚光灯效果 */
+        /* 聚光灯光束效果 - 向下发散 */
         .logo-card.active::before {
             content: '';
             position: absolute;
-            top: -600px;
+            top: 100%;
             left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 700px;
+            width: 120px;
+            height: 300px;
             background: linear-gradient(
                 to bottom,
-                rgba(249, 212, 35, 0) 0%,
-                rgba(249, 212, 35, 0.15) 30%,
-                rgba(255, 215, 0, 0.3) 60%,
-                rgba(255, 200, 50, 0.5) 85%,
-                rgba(255, 215, 0, 0.8) 100%
+                rgba(250, 223, 67, 0.6) 0%,
+                rgba(250, 223, 67, 0.3) 30%,
+                rgba(250, 223, 67, 0.1) 60%,
+                transparent 100%
             );
+            transform: translateX(-50%);
             clip-path: polygon(
-                40% 0%, 
-                60% 0%, 
-                70% 100%, 
-                30% 100%
+                40% 0%,
+                60% 0%,
+                100% 100%,
+                0% 100%
             );
             pointer-events: none;
             z-index: -1;
-            animation: spotlight-glow 2s ease-in-out infinite;
+            animation: spotlightFlicker 3s ease-in-out infinite;
         }
         
-        /* 聚光灯底部光晕 */
+        @keyframes spotlightFlicker {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        /* 呼吸光晕效果 - 外环扩散 */
         .logo-card.active::after {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
             width: 200%;
             height: 200%;
+            border-radius: 50%;
             background: radial-gradient(
                 circle,
-                rgba(255, 215, 0, 0.4) 0%,
-                rgba(249, 212, 35, 0.2) 40%,
+                rgba(250, 223, 67, 0.4) 0%,
+                rgba(250, 223, 67, 0.1) 50%,
                 transparent 70%
             );
+            transform: translate(-50%, -50%);
+            animation: haloPulse 2s ease-in-out infinite;
             pointer-events: none;
             z-index: -1;
-            animation: halo-pulse 2s ease-in-out infinite;
         }
         
-        @keyframes spotlight-glow {
-            0%, 100% {
-                opacity: 0.8;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes halo-pulse {
+        @keyframes haloPulse {
             0%, 100% {
                 transform: translate(-50%, -50%) scale(1);
                 opacity: 0.6;
             }
             50% {
-                transform: translate(-50%, -50%) scale(1.1);
-                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
             }
+        }
+        
+        .logo-card.active {
+            width: 140px;
+            height: 140px;
+            opacity: 1;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 20px 60px rgba(250, 223, 67, 0.5),
+                0 0 40px rgba(250, 223, 67, 0.8),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            filter: brightness(1.2) drop-shadow(0 0 30px rgba(250, 223, 67, 1));
         }
         
         .logo-card img {
@@ -1360,6 +1355,1460 @@
             -webkit-text-fill-color: transparent;
             font-weight: 800;
         }
+        
+        /* ========== AI三人格陪伴 - Bento Box风格 ========== */
+        #ai-personality {
+            background: #F5F5F7;
+            padding: 120px 60px;
+        }
+        
+        #ai-personality .section-title {
+            color: #1E293B;
+        }
+        
+        #ai-personality .subtitle {
+            color: #64748B;
+        }
+        
+        .personality-bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+        
+        .personality-bento-card {
+            background: #FFFFFF;
+            border-radius: 32px;
+            padding: 48px 32px;
+            position: relative;
+            overflow: visible;
+            border: 1px solid transparent;
+            background-clip: padding-box;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s ease;
+        }
+        
+        .personality-bento-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 32px;
+            padding: 1px;
+            background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+        }
+        
+        .personality-bento-card.melty::before {
+            background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+        }
+        
+        .personality-bento-card.logic::before {
+            background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+        }
+        
+        .personality-bento-card.spark::before {
+            background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+        }
+        
+        .personality-bento-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
+        }
+        
+        .personality-ip-area {
+            width: 180px;
+            height: 180px;
+            margin: -40px auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #FFFFFF;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            z-index: 2;
+            position: relative;
+        }
+        
+        .personality-ip-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .personality-content {
+            text-align: center;
+        }
+        
+        .therapy-tag-pill {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #FFFFFF;
+            background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+        }
+        
+        .melty .therapy-tag-pill {
+            background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+        }
+        
+        .logic .therapy-tag-pill {
+            background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+        }
+        
+        .spark .therapy-tag-pill {
+            background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+        }
+        
+        .tool-visualization {
+            margin: 32px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 120px;
+        }
+        
+        /* 呼吸圆环 */
+        .breathing-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #A78BFA, #C4B5FD);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #8B5CF6;
+            animation: breathePulse 8s ease-in-out infinite;
+            box-shadow: 0 0 0 rgba(139, 92, 246, 0.4);
+        }
+        
+        @keyframes breathePulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(139, 92, 246, 0.4);
+            }
+            25% {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+            }
+            50% {
+                transform: scale(1.2);
+                box-shadow: 0 0 40px rgba(139, 92, 246, 0.8);
+            }
+            75% {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+            }
+        }
+        
+        /* 对话气泡 */
+        .chat-bubbles {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .chat-bubble {
+            padding: 12px 20px;
+            border-radius: 16px;
+            font-size: 14px;
+            max-width: 140px;
+        }
+        
+        .chat-bubble.user {
+            background: #E5E7EB;
+            color: #1F2937;
+        }
+        
+        .chat-bubble.ai {
+            background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+            color: #FFFFFF;
+        }
+        
+        .chat-arrow {
+            font-size: 24px;
+            color: #6B5B95;
+        }
+        
+        /* 梗图卡片 */
+        .meme-card {
+            width: 140px;
+            height: 160px;
+            background: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transform: rotate(-3deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding-bottom: 40px;
+        }
+        
+        .meme-card::before {
+            content: '😎';
+            font-size: 48px;
+        }
+        
+        .meme-card::after {
+            content: '';
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            height: 8px;
+            background: linear-gradient(90deg, #FFD93D, #A8E63D);
+            border-radius: 4px;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #A78BFA;
+            border-radius: 50%;
+        }
+        
+        .confetti-piece:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            background: #A78BFA;
+        }
+        
+        .confetti-piece:nth-child(2) {
+            top: 30%;
+            right: 15%;
+            background: #8B5CF6;
+        }
+        
+        .confetti-piece:nth-child(3) {
+            bottom: 40%;
+            left: 20%;
+            background: #C4B5FD;
+        }
+        
+        .confetti-piece:nth-child(4) {
+            bottom: 30%;
+            right: 10%;
+            background: #7C3AED;
+        }
+        
+        .personality-tool-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 16px;
+        }
+        
+        .personality-feature {
+            font-size: 14px;
+            color: #64748B;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .personality-principle {
+            font-size: 13px;
+            color: #94A3B8;
+            line-height: 1.6;
+            padding-left: 16px;
+            border-left: 3px solid #E2E8F0;
+        }
+        
+        /* 技术底座板块 */
+        .tech-stack-section {
+            margin-top: 80px;
+            background: #1E293B;
+            border-radius: 24px;
+            padding: 48px;
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 32px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-stack-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+            opacity: 0.5;
+        }
+        
+        .tech-icon {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chip-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #8B5CF6, #3B82F6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            animation: chipGlow 3s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+        }
+        
+        @keyframes chipGlow {
+            0%, 100% {
+                box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(139, 92, 246, 0.9);
+            }
+        }
+        
+        .tech-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tech-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 16px;
+            font-family: 'SF Mono', 'Monaco', monospace;
+        }
+        
+        .tech-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .tech-highlight {
+            color: #A78BFA;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 1024px) {
+            .personality-bento-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .tech-stack-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .tech-icon {
+                margin: 0 auto;
+            }
+        }
+        
+        /* ========== AI场景风格化引擎 ========== */
+        #ai-campus-engine {
+            background: linear-gradient(to bottom, #0F172A, #1E293B);
+            padding: 80px 40px;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #ai-campus-engine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+        
+        .ai-engine-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .ai-engine-title {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60A5FA, #A78BFA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .ai-engine-subtitle {
+            font-size: 18px;
+            color: #94A3B8;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .tech-tag {
+            padding: 8px 16px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            font-size: 13px;
+            color: #60A5FA;
+            font-weight: 600;
+        }
+        
+        .ai-engine-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 32px;
+        }
+        
+        .developer-note {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+            border-left: 4px solid #A78BFA;
+            padding: 24px;
+            border-radius: 12px;
+            margin: 0;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        
+        .note-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        
+        .developer-note strong {
+            color: #FFFFFF;
+        }
+        
+        .developer-note {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        .cost-highlight {
+            background: linear-gradient(135deg, #FDE68A, #FCA5A5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            font-size: 17px;
+        }
+        
+        /* MacBook样机 */
+        .macbook-mockup {
+            background: #2D3748;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .macbook-screen {
+            background: #1E293B;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 16/10;
+        }
+        
+        .demo-screenshot {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #10B981, transparent);
+            animation: scanMove 3s linear infinite;
+            filter: blur(1px);
+            box-shadow: 0 0 10px #10B981;
+        }
+        
+        @keyframes scanMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(400px); }
+        }
+        
+        /* 无限滚动容器 */
+        .infinite-scroll-container {
+            margin-top: 60px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .infinite-scroll-track {
+            display: flex;
+            gap: 24px;
+            animation: infiniteScroll 40s linear infinite;
+            will-change: transform;
+        }
+        
+        .infinite-scroll-track:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes infiniteScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-320px * 5 - 24px * 5)); }
+        }
+        
+        /* 拍立得卡片 */
+        .polaroid-card {
+            flex-shrink: 0;
+            width: 320px;
+            background: #FFFFFF;
+            border-radius: 8px;
+            padding: 16px 16px 80px 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+        }
+        
+        .polaroid-card:nth-child(even) {
+            transform: rotate(2deg);
+        }
+        
+        .polaroid-card:hover {
+            transform: scale(1.1) rotate(0deg);
+            z-index: 10;
+        }
+        
+        .polaroid-card img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        
+        /* 技术底部 */
+        .tech-footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #64748B;
+            font-family: 'SF Mono', 'Monaco', monospace;
+        }
+        
+        .tech-footer .divider {
+            margin: 0 16px;
+            color: #334155;
+        }
+        
+        @media (max-width: 1024px) {
+            .ai-engine-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            #ai-campus-engine {
+                padding: 60px 20px;
+            }
+            
+            .infinite-scroll-track {
+                animation: infiniteScrollMobile 30s linear infinite;
+            }
+            
+            @keyframes infiniteScrollMobile {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(-280px * 5 - 20px * 5)); }
+            }
+        }
+        
+        /* ========== 高校管理员后台 - SaaS产品着陆页风格 ========== */
+        #admin-dashboard {
+            background: linear-gradient(180deg, #0B1120 0%, #1E293B 50%, #0F172A 100%);
+            padding: 120px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 等高线纹理背景 */
+        #admin-dashboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        /* 数据流光效果 - 已禁用 */
+        
+        #admin-dashboard .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title-admin {
+            font-size: 48px;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(135deg, #FFFFFF, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+        
+        .subtitle-admin {
+            text-align: center;
+            font-size: 20px;
+            color: #64748B;
+            margin-bottom: 80px;
+        }
+        
+        /* 浏览器外壳 */
+        .browser-mockup {
+            background: #1E293B;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 80px rgba(139, 92, 246, 0.2),
+                0 0 120px rgba(59, 130, 246, 0.1);
+            position: relative;
+            z-index: 2;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+        
+        .browser-mockup:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.6),
+                0 0 100px rgba(139, 92, 246, 0.3),
+                0 0 150px rgba(59, 130, 246, 0.2);
+        }
+        
+        .browser-header {
+            background: #0F172A;
+            padding: 12px 16px;
+            display: grid;
+            grid-template-columns: 80px 1fr 80px;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .browser-dots {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .dot.red { background: #EF4444; }
+        .dot.yellow { background: #F59E0B; }
+        .dot.green { background: #10B981; }
+        
+        .browser-address-bar {
+            background: #1E293B;
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #94A3B8;
+            font-family: 'SF Mono', monospace;
+        }
+        
+        .lock-icon {
+            font-size: 12px;
+        }
+        
+        .browser-content {
+            background: #0F172A;
+            position: relative;
+        }
+        
+        .dashboard-screenshot {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Hero Dashboard */
+        .hero-dashboard {
+            margin-bottom: 60px;
+        }
+        
+        /* 浮动登录卡片 */
+        .floating-card {
+            position: absolute;
+            width: 280px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            transform: rotate(-5deg);
+            transition: all 0.3s ease;
+            z-index: 3;
+            animation: floatPulse 3s ease-in-out infinite;
+        }
+        
+        .floating-card:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
+        }
+        
+        @keyframes floatPulse {
+            0%, 100% { transform: rotate(-5deg) translateY(0); }
+            50% { transform: rotate(-5deg) translateY(-10px); }
+        }
+        
+        .login-card {
+            bottom: 100px;
+            left: 40px;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+        }
+        
+        .floating-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Z型布局 */
+        .z-layout-section {
+            margin-top: 120px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .z-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 120px;
+        }
+        
+        .z-row.reverse {
+            direction: rtl;
+        }
+        
+        .z-row.reverse > * {
+            direction: ltr;
+        }
+        
+        .z-text-area {
+            padding: 40px;
+        }
+        
+        .feature-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 24px;
+        }
+        
+        .stat-number {
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FDE68A, #FCA5A5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+            animation: counterUp 2s ease-out;
+        }
+        
+        @keyframes counterUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stat-label {
+            font-size: 18px;
+            color: #A78BFA;
+            font-weight: 600;
+        }
+        
+        .feature-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 32px;
+        }
+        
+        .highlight-text {
+            color: #FDE68A;
+            font-weight: 600;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        /* 玻璃质感图片框 */
+        .glass-frame {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .glass-frame:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
+        }
+        
+        .glass-frame img {
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+        }
+        
+        /* 数据卡片 */
+        .data-highlights {
+            display: flex;
+            gap: 24px;
+            margin-top: 32px;
+        }
+        
+        .data-card {
+            flex: 1;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .data-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        
+        .data-label {
+            font-size: 14px;
+            color: #94A3B8;
+            margin-bottom: 8px;
+        }
+        
+        .data-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+        
+        /* 活动发布区域 */
+        .activity-publish-section {
+            margin-top: 120px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-subtitle {
+            font-size: 32px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 16px;
+        }
+        
+        .section-description {
+            font-size: 18px;
+            color: #64748B;
+            margin-bottom: 60px;
+        }
+        
+        .activity-demo-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .activity-center-image {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .activity-center-image img {
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+        }
+        
+        /* 浮动通知卡片 */
+        .floating-notification {
+            position: absolute;
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: notificationSlideIn 0.6s ease-out;
+            z-index: 10;
+        }
+        
+        @keyframes notificationSlideIn {
+            from { 
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .notification-1 {
+            top: 20%;
+            right: -180px;
+            animation-delay: 0.3s;
+        }
+        
+        .notification-2 {
+            top: 50%;
+            right: -200px;
+            animation-delay: 0.6s;
+        }
+        
+        .notification-3 {
+            top: 80%;
+            right: -180px;
+            animation-delay: 0.9s;
+        }
+        
+        .notification-icon {
+            font-size: 24px;
+        }
+        
+        .notification-content {
+            flex: 1;
+        }
+        
+        .notification-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 4px;
+        }
+        
+        .notification-text {
+            font-size: 12px;
+            color: #64748B;
+        }
+        
+        /* Lightbox 灯箱 */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 36px;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .lightbox-close:hover {
+            color: #EF4444;
+            transform: rotate(90deg);
+        }
+        
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            text-align: center;
+            font-family: 'SF Mono', monospace;
+        }
+        
+        /* 视频播放器模态框 */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-modal.show {
+            opacity: 1;
+        }
+        
+        .video-modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 1200px;
+            background: #1E293B;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #000;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .video-modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            font-size: 48px;
+            color: #FFFFFF;
+            cursor: pointer;
+            z-index: 10001;
+            transition: all 0.3s;
+            font-weight: 300;
+            line-height: 1;
+        }
+        
+        .video-modal-close:hover {
+            color: #EF4444;
+            transform: rotate(90deg);
+        }
+        
+        .video-caption {
+            padding: 16px 24px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            font-family: 'SF Mono', monospace;
+        }
+        
+        /* 播放按钮覆盖层 */
+        .play-button-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .browser-mockup:hover .play-button-overlay {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .play-button-overlay svg {
+            filter: drop-shadow(0 10px 30px rgba(139, 92, 246, 0.6));
+        }
+        
+        @media (max-width: 768px) {
+            .video-modal-content {
+                width: 95%;
+            }
+            
+            .video-modal-close {
+                top: -40px;
+                font-size: 36px;
+            }
+        }
+        
+        /* 新增样式：Hero Dashboard Wrapper */
+        .hero-dashboard-wrapper {
+            position: relative;
+            margin-bottom: 120px;
+        }
+        
+        /* 新增：悬浮登录卡片 */
+        .floating-login-card {
+            position: absolute;
+            bottom: -60px;
+            left: 5%;
+            width: 260px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: rotate(-3deg);
+            transition: all 0.4s ease;
+            z-index: 5;
+            cursor: pointer;
+            animation: phoneFloat 4s ease-in-out infinite;
+        }
+        
+        .floating-login-card:hover {
+            transform: rotate(0deg) scale(1.08);
+            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.5);
+        }
+        
+        @keyframes phoneFloat {
+            0%, 100% { transform: rotate(-3deg) translateY(0); }
+            50% { transform: rotate(-3deg) translateY(-12px); }
+        }
+        
+        .floating-login-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 新增：放大镜效果容器 */
+        .magnify-container {
+            position: relative;
+            cursor: zoom-in;
+        }
+        
+        .magnify-lens {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 3px solid rgba(59, 130, 246, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        .magnify-container:hover .magnify-lens {
+            opacity: 1;
+        }
+        
+        /* 统计高亮 */
+        .stat-highlight {
+            margin: 32px 0;
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 16px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .stat-highlight .stat-number {
+            font-size: 64px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .stat-highlight .stat-label {
+            font-size: 16px;
+            color: #94A3B8;
+            font-weight: 600;
+        }
+        
+        /* 数据洞察卡片 */
+        .data-insights {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+        }
+        
+        .insight-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s;
+        }
+        
+        .insight-card:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateY(-4px);
+        }
+        
+        .insight-icon {
+            font-size: 32px;
+        }
+        
+        .insight-content {
+            flex: 1;
+        }
+        
+        .insight-label {
+            font-size: 13px;
+            color: #94A3B8;
+            margin-bottom: 4px;
+        }
+        
+        .insight-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+        
+        /* 活动发布板块 */
+        .activity-section {
+            margin-top: 120px;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 32px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 16px;
+        }
+        
+        .section-description {
+            font-size: 18px;
+            color: #64748B;
+            margin-bottom: 60px;
+        }
+        
+        .activity-container {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto;
+        }
+        
+        .activity-main-image {
+            max-width: 800px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .activity-main-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+        
+        .activity-main-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 通知卡片 */
+        .notification-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 280px;
+            backdrop-filter: blur(10px);
+            animation: notificationPop 0.6s ease-out;
+            cursor: default;
+        }
+        
+        @keyframes notificationPop {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .notify-1 {
+            top: 20%;
+            right: -320px;
+            animation-delay: 0.5s;
+        }
+        
+        .notify-2 {
+            top: 50%;
+            right: -340px;
+            animation-delay: 1s;
+        }
+        
+        .notify-3 {
+            top: 75%;
+            right: -320px;
+            animation-delay: 1.5s;
+        }
+        
+        .notify-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+        
+        .notify-content {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .notify-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0F172A;
+            margin-bottom: 4px;
+        }
+        
+        .notify-time {
+            font-size: 12px;
+            color: #64748B;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            #admin-dashboard {
+                padding: 80px 20px;
+            }
+            
+            .z-row {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .data-insights {
+                grid-template-columns: 1fr;
+            }
+            
+            .notification-card {
+                position: static;
+                margin: 16px auto;
+                max-width: 320px;
+            }
+            
+            .floating-login-card {
+                position: static;
+                margin: 40px auto 0;
+                transform: rotate(0);
+            }
+            
+            .floating-card {
+                position: static;
+                transform: rotate(0);
+                margin: 40px auto;
+            }
+            
+            .floating-notification {
+                position: static;
+                margin: 20px auto;
+                max-width: 300px;
+            }
+            
+            .activity-demo-container {
+                padding: 0 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1387,16 +2836,34 @@
                 </h1>
                 <p class="subtitle">高校AI情绪陪伴与心理服务平台</p>
                 
-                <div class="hero-image">
-                    <img src="默认 ip.png" alt="Famlée IP形象">
+                <!-- 在线体验模块 -->
+                <div class="online-experience">
+                    <p class="online-hint">即刻触达高校心理守护</p>
+                    <div class="browser-bar" onclick="window.open('https://famlee.zdanny.cn/', '_blank')">
+                        <div class="browser-bar-inner">
+                            <svg class="lock-icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span class="url-text">https://famlee.zdanny.cn/</span>
+                            <div class="go-button">
+                                <span>GO</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="glow-effect"></div>
+                    </div>
                 </div>
                 
                 <div style="margin-top: 60px;">
                     <p style="font-size: 24px; color: rgba(255,255,255,0.8); margin-bottom: 16px;">
-                        各位专家评审，今天我带来的不只是一个可为高校定制的心理健康h5
+                        各位专家评审，今天我带来的不是一个心理App
                     </p>
                     <p style="font-size: 28px; font-weight: 700; color: var(--color-cream);">
-                        更是一套<span class="highlight-gradient">可复制、能落地、学校愿意买单</span>的<br>
+                        而是一套<span class="highlight-gradient">可复制、能落地、学校愿意买单</span>的<br>
                         高校心理服务数字化解决方案
                     </p>
                 </div>
@@ -1717,156 +3184,292 @@
         </div>
     </section>
     
-    <!-- 5. AI人格系统 -->
-    <section id="ai-personality" class="section">
+    <!-- 5. AI三人格陪伴 - 功能特性展示 -->
+    <section id="ai-personality">
         <div class="container">
-            <h2 class="section-title">AI三人格系统：千人千面的情绪陪伴</h2>
-            <p class="subtitle">不同心境，选择不同的"心理按摩师"</p>
+            <h2 class="section-title">AI三人格系统：专业疗法 × 智能陪伴</h2>
+            <p class="subtitle">千人千面的心理服务，将CBT/ACT等专业疗法转化为可落地的AI交互</p>
             
-            <div class="personality-grid">
-                <div class="glass-card personality-card melty">
-                    <div class="personality-avatar">
-                        <img src="项目示例高校北邮形象图集/形象大头表情包/委屈.png" alt="Melty治愈系">
+            <!-- Bento Box 卡片网格 -->
+            <div class="personality-bento-grid">
+                <!-- 卡片 A：治愈系 Melty -->
+                <div class="personality-bento-card melty">
+                    <!-- IP形象 - 破框而出 -->
+                    <div class="personality-ip-area">
+                        <img src="项目示例高校北邮形象图集/形象大头表情包/委屈.png" alt="Melty 治愈系">
                     </div>
-                    <div class="personality-name">Melty 治愈系</div>
-                    <p class="personality-desc">ACT接纳承诺疗法<br>正念呼吸 · 情绪接纳</p>
+                    
+                    <div class="personality-content">
+                        <!-- 疗法标签 -->
+                        <span class="therapy-tag-pill">ACT 疗法</span>
+                        
+                        <!-- 核心工具可视化 -->
+                        <div class="tool-visualization">
+                            <div class="breathing-circle">4-7-8</div>
+                        </div>
+                        
+                        <!-- 文字描述 -->
+                        <h3 class="personality-tool-name">正念呼吸引导</h3>
+                        <p class="personality-feature">
+                            当检测到用户高焦虑词汇时，AI 主动触发呼吸动画引导。
+                        </p>
+                        <div class="personality-principle">
+                            <strong>原理：</strong>基于生理反馈机制，通过 4-7-8 呼吸法降低皮质醇水平，实现即时情绪降温。
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="glass-card personality-card logic">
-                    <div class="personality-avatar">
-                        <img src="项目示例高校北邮形象图集/形象大头表情包/惊讶.png" alt="Logic理性系">
+                <!-- 卡片 B：理性系 Logic -->
+                <div class="personality-bento-card logic">
+                    <div class="personality-ip-area">
+                        <img src="项目示例高校北邮形象图集/形象大头表情包/惊讶.png" alt="Logic 理性系">
                     </div>
-                    <div class="personality-name">Logic 理性系</div>
-                    <p class="personality-desc">CBT认知行为疗法<br>认知重构 · 逆向思考</p>
+                    
+                    <div class="personality-content">
+                        <span class="therapy-tag-pill">CBT 疗法</span>
+                        
+                        <div class="tool-visualization">
+                            <div class="chat-bubbles">
+                                <div class="chat-bubble user">我完蛋了</div>
+                                <div class="chat-arrow">→</div>
+                                <div class="chat-bubble ai">这是一种灾难化思维...</div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="personality-tool-name">认知重构卡片</h3>
+                        <p class="personality-feature">
+                            AI 识别用户语句中的"绝对化"或"灾难化"思维，自动生成反向提问卡片。
+                        </p>
+                        <div class="personality-principle">
+                            <strong>技术实现：</strong>基于 Chain-of-Thought (CoT) 提示词工程，AI 不直接给答案，而是通过苏格拉底式提问引导学生自我辩驳。
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="glass-card personality-card spark">
-                    <div class="personality-avatar">
-                        <img src="项目示例高校北邮形象图集/形象大头表情包/生气.png" alt="Spark趣味系">
+                <!-- 卡片 C：趣味系 Spark -->
+                <div class="personality-bento-card spark">
+                    <div class="personality-ip-area">
+                        <img src="项目示例高校北邮形象图集/形象大头表情包/生气.png" alt="Spark 趣味系">
                     </div>
-                    <div class="personality-name">Spark 趣味系</div>
-                    <p class="personality-desc">幽默解构<br>MBTI速测 · 毒舌锐评</p>
+                    
+                    <div class="personality-content">
+                        <span class="therapy-tag-pill">幽默解构</span>
+                        
+                        <div class="tool-visualization">
+                            <div class="meme-card">
+                                <div class="confetti">
+                                    <div class="confetti-piece"></div>
+                                    <div class="confetti-piece"></div>
+                                    <div class="confetti-piece"></div>
+                                    <div class="confetti-piece"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="personality-tool-name">MBTI 梗图生成器</h3>
+                        <p class="personality-feature">
+                            根据用户烦恼，即时生成对应的 MBTI 人格梗图或毒舌锐评。
+                        </p>
+                        <div class="personality-principle">
+                            <strong>价值：</strong>将心理困扰转化为"社交货币"，利用群体标签效应（Labeling Effect）消解孤独感。
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <!-- 表情包展示 -->
-            <div style="margin-top: 80px;">
-                <h3 style="font-size: 28px; text-align: center; margin-bottom: 32px;">丰富的情绪表达</h3>
-                <div class="emotion-grid">
-                    <div class="emotion-item">
-                        <img src="项目示例高校北邮形象图集/形象大头表情包/悲伤.png" alt="悲伤">
+            <!-- 技术底座板块 -->
+            <div class="tech-stack-section">
+                <div class="tech-icon">
+                    <div class="chip-icon">🧠</div>
+                </div>
+                <div class="tech-content">
+                    <h3 class="tech-title">Powered by LLM & Prompt Engineering</h3>
+                    <p class="tech-description">
+                        底层接入大语言模型，通过独家研发的<span class="tech-highlight">"心理咨询结构化提示词库 (Structured Prompt Library)"</span>，
+                        将专业的心理咨询流程转化为 AI 可执行的对话指令，确保回复的安全性和专业度。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 5.5. 高校管理后台 - SaaS产品着陆页风格 -->
+    <section id="admin-dashboard">
+        <div class="container">
+            <h2 class="section-title-admin">高校管理端数字化工作台</h2>
+            <p class="subtitle-admin">数据驱动的心理健康监测、预警与干预平台</p>
+            
+            <!-- 第一部分：全景驾驶舱 -->
+            <div class="hero-dashboard-wrapper">
+                <!-- 主浏览器窗口 -->
+                <div class="browser-mockup hero-dashboard" onclick="openVideoModal()">
+                    <div class="browser-header">
+                        <div class="browser-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="browser-address-bar">
+                            <span class="lock-icon">🔒</span>
+                            <span>bilibili.com/video/管理后台演示</span>
+                        </div>
+                        <div class="browser-actions"></div>
                     </div>
-                    <div class="emotion-item">
-                        <img src="项目示例高校北邮形象图集/形象大头表情包/委屈.png" alt="委屈">
+                    <div class="browser-content">
+                        <img src="高校 管理员后台/数据统计看板.png" alt="数据统计驾驶舱 - 点击观看演示视频" class="dashboard-screenshot">
+                        <div class="play-button-overlay">
+                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                <circle cx="40" cy="40" r="40" fill="rgba(139, 92, 246, 0.9)"/>
+                                <path d="M32 25L55 40L32 55V25Z" fill="white"/>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="emotion-item">
-                        <img src="项目示例高校北邮形象图集/形象大头表情包/惊讶.png" alt="惊讶">
+                </div>
+                
+                <!-- 左下角悬浮登录卡片 -->
+                <div class="floating-login-card" onclick="openLightbox(this)">
+                    <img src="高校 管理员后台/管理员登录页.png" alt="管理员登录页">
+                </div>
+            </div>
+            
+            <!-- 第二部分：Z字形交替布局 - 数据价值深挖 -->
+            <div class="z-layout-section">
+                <!-- Group A: 左文右图 - 情绪转化分析 -->
+                <div class="z-row">
+                    <div class="z-text-area">
+                        <h3 class="feature-title">看见情绪的流向</h3>
+                        <div class="stat-highlight">
+                            <div class="stat-number">73.8%</div>
+                            <div class="stat-label">情绪改善率</div>
+                        </div>
+                        <p class="feature-description">
+                            精准量化心理服务效果。通过AI多轮对话追踪，清晰展示从"焦虑"到"平和"的转化路径。
+                            每一条数据背后，都是一个被及时关注到的学生。
+                        </p>
+                        <ul class="feature-list">
+                            <li>✓ 实时情绪分值曲线图</li>
+                            <li>✓ 多维度情绪分类统计</li>
+                            <li>✓ 个体情绪变化趋势</li>
+                            <li>✓ 负面情绪预警机制</li>
+                        </ul>
                     </div>
-                    <div class="emotion-item">
-                        <img src="项目示例高校北邮形象图集/形象大头表情包/生气.png" alt="生气">
+                    <div class="z-image-area">
+                        <div class="glass-frame magnify-container" onclick="openLightbox(this)">
+                            <img src="高校 管理员后台/数据分析页2.png" alt="情绪转化数据分析">
+                            <div class="magnify-lens"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Group B: 右文左图 - 用户画像与时长 -->
+                <div class="z-row reverse">
+                    <div class="z-image-area">
+                        <div class="glass-frame magnify-container" onclick="openLightbox(this)">
+                            <img src="高校 管理员后台/数据分析页1.png" alt="24小时校园心理晴雨表">
+                            <div class="magnify-lens"></div>
+                        </div>
+                    </div>
+                    <div class="z-text-area">
+                        <h3 class="feature-title">24小时校园心理晴雨表</h3>
+                        <p class="feature-description">
+                            实时监控活跃时段与人格分布，辅助学校合理调配咨询师资源。
+                            识别<span class="highlight-text">"深夜情绪高发期"</span>，为干预策略提供数据支撑。
+                        </p>
+                        <div class="data-insights">
+                            <div class="insight-card">
+                                <div class="insight-icon">🌙</div>
+                                <div class="insight-content">
+                                    <div class="insight-label">深夜高峰</div>
+                                    <div class="insight-value">23:00 - 02:00</div>
+                                </div>
+                            </div>
+                            <div class="insight-card">
+                                <div class="insight-icon">⚠️</div>
+                                <div class="insight-content">
+                                    <div class="insight-label">月度预警</div>
+                                    <div class="insight-value">12次触发</div>
+                                </div>
+                            </div>
+                            <div class="insight-card">
+                                <div class="insight-icon">📊</div>
+                                <div class="insight-content">
+                                    <div class="insight-label">活跃用户</div>
+                                    <div class="insight-value">2,450人</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第三部分：活动发布 - 闭环服务 -->
+            <div class="activity-section">
+                <h3 class="section-subtitle">线上线下闭环：活动发布与实时联动</h3>
+                <p class="section-description">后台一键发布，自动推送到学生端，报名数据实时回流</p>
+                
+                <div class="activity-container">
+                    <!-- 中心图片 -->
+                    <div class="activity-main-image" onclick="openLightbox(this)">
+                        <img src="高校 管理员后台/活动内容发布.png" alt="活动发布界面">
+                    </div>
+                    
+                    <!-- 浮动通知卡片1 -->
+                    <div class="notification-card notify-1">
+                        <div class="notify-icon">📢</div>
+                        <div class="notify-content">
+                            <div class="notify-title">活动已推送到学生端</div>
+                            <div class="notify-time">2分钟前</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 浮动通知卡片2 -->
+                    <div class="notification-card notify-2">
+                        <div class="notify-icon">👥</div>
+                        <div class="notify-content">
+                            <div class="notify-title">已有 150 人报名</div>
+                            <div class="notify-time">实时更新</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 浮动通知卡片3 -->
+                    <div class="notification-card notify-3">
+                        <div class="notify-icon">✅</div>
+                        <div class="notify-content">
+                            <div class="notify-title">数据同步成功</div>
+                            <div class="notify-time">刚刚</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- 5.5. 高校管理后台展示 -->
-    <section id="admin-dashboard" class="section">
-        <div class="container admin-dashboard-content">
-            <h2 class="section-title">高校管理端：看不见的心理守护，看得见的数据洞察</h2>
-            <p class="subtitle">为高校提供全方位的心理健康监测、预警与干预工具，让心理工作数字化、可视化</p>
-            
-            <!-- Bento Grid 布局 -->
-            <div class="bento-grid">
-                <!-- 第一组：专属管理门户 - 8列 + 4列 -->
-                <div class="bento-card small" data-aos="fade-up" data-aos-delay="0">
-                    <h3 class="bento-card-title">专属管理门户</h3>
-                    <p class="bento-card-desc">
-                        独立部署的高校管理端，支持权限分级。一屏掌握全校心理健康大盘，实时监控用户活跃度与情绪分布。
-                    </p>
-                    <div class="bento-card-image">
-                        <img src="高校 管理员后台/管理员登录页.png" alt="管理员登录页">
-                    </div>
-                </div>
-                
-                <div class="bento-card large" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="bento-card-title">全局概览看板</h3>
-                    <p class="bento-card-desc">
-                        实时数据大屏，清晰呈现总对话数、情绪分布、活跃用户等核心指标。
-                    </p>
-                    <div class="bento-card-image">
-                        <img src="高校 管理员后台/数据统计看板.png" alt="数据统计看板">
-                    </div>
-                </div>
-                
-                <!-- 第二组：深度行为洞察 - 全宽 -->
-                <div class="bento-card full" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="bento-card-title">多维数据分析体系</h3>
-                    <p class="bento-card-desc">
-                        从"对话时长"到"情绪转化率"，深度量化心理服务效果。<br>
-                        <span class="highlight-stat">
-                            亮点数据：焦虑转平和成功率达 <span class="counter-number" data-target="73.8">0</span>%
-                        </span>
-                        <span class="highlight-stat">
-                            CBT/ACT疗法使用占比清晰可见
-                        </span>
-                    </p>
-                    <div class="bento-card-images-group">
-                        <div class="bento-card-image">
-                            <img src="高校 管理员后台/数据分析页1.png" alt="数据分析页1 - 日记总数与人格偏好">
-                        </div>
-                        <div class="bento-card-image">
-                            <img src="高校 管理员后台/数据分析页2.png" alt="数据分析页2 - 情绪转化分析">
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 第三组：校园活动发布 - 6列 + 6列 -->
-                <div class="bento-card medium" data-aos="fade-up" data-aos-delay="300">
-                    <div class="bento-card-image">
-                        <img src="高校 管理员后台/活动内容发布.png" alt="活动内容发布">
-                    </div>
-                </div>
-                
-                <div class="bento-card medium" data-aos="fade-up" data-aos-delay="350">
-                    <h3 class="bento-card-title">心理活动一键发布</h3>
-                    <p class="bento-card-desc">
-                        打破信息差。学校可直接通过后台发布讲座、团辅、工作坊，信息直达学生端 App 的"布告栏"，实现线上线下的服务闭环。
-                    </p>
-                    <ul style="list-style: none; padding: 0; margin-top: 24px;">
-                        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 16px; color: rgba(255,255,255,0.8);">
-                            ✓ 活动标题、时间、地点快速设置
-                        </li>
-                        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 16px; color: rgba(255,255,255,0.8);">
-                            ✓ 支持图片、海报上传
-                        </li>
-                        <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 16px; color: rgba(255,255,255,0.8);">
-                            ✓ 学生端实时同步显示
-                        </li>
-                        <li style="padding: 12px 0; font-size: 16px; color: rgba(255,255,255,0.8);">
-                            ✓ 报名人数实时统计
-                        </li>
-                    </ul>
-                </div>
+    <!-- Lightbox 灯箱查看器 -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="放大查看">
+        <div class="lightbox-caption">点击图片外区域或按ESC键关闭 | 滚轮缩放</div>
+    </div>
+    
+    <!-- 视频播放器模态框 -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-modal-content">
+            <span class="video-modal-close" onclick="closeVideoModal()">&times;</span>
+            <div class="video-wrapper">
+                <iframe id="videoPlayer" 
+                        src="" 
+                        scrolling="no" 
+                        border="0" 
+                        frameborder="no" 
+                        framespacing="0" 
+                        allowfullscreen="true"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        style="width: 100%; height: 100%;">
+                </iframe>
             </div>
-            
-            <!-- 视频演示区域 -->
-            <div class="demo-video-section" data-aos="fade-up" data-aos-delay="400">
-                <h3 style="font-size: 32px; margin-bottom: 16px; background: linear-gradient(135deg, var(--color-lavender), var(--color-neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                    管理后台真实操作演示
-                </h3>
-                <p style="font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 40px;">
-                    完整展示从数据查看到活动发布的全流程操作
-                </p>
-                <div class="demo-video-container-admin">
-                    <video controls muted playsinline>
-                        <source src="高校 管理员后台/后台演示视频.mp4" type="video/mp4">
-                        您的浏览器不支持视频播放
-                    </video>
-                </div>
-            </div>
+            <div class="video-caption">高校管理后台演示视频 - 按ESC或点击外部关闭</div>
         </div>
-    </section>
+    </div>
     
     <!-- 6. 商业模式 -->
     <section id="business" class="section">
@@ -2057,10 +3660,10 @@
                     </p>
                     
                     <ul class="case-highlights">
-                        <li>基于校徽、校色自动定制高校系列IP形象</li>
+                        <li>基于校徽、校色自动生成IP形象</li>
                         <li>支持多种风格和情绪表情</li>
-                        <li>一键生成服装、表情、动作、多视角效果图</li>
-                        <li>强可复制性</li>
+                        <li>一键生成文创周边效果图</li>
+                        <li>从设计到落地，周期缩短至3天</li>
                     </ul>
                 </div>
             </div>
@@ -2084,27 +3687,93 @@
                 </div>
             </div>
             
-            <!-- AI风格化校园图 -->
-            <div style="margin-top: 80px;">
-                <h3 style="font-size: 32px; text-align: center; margin-bottom: 24px;">AI风格化校园场景</h3>
-                <p style="text-align: center; font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 40px;">
-                    利用AI工具，将真实校园场景转换为品牌风格统一的视觉素材
-                </p>
-                <div class="campus-gallery">
-                    <div class="campus-image">
-                        <img src="ai风格化校园图图集/风格化后/wild-journey-8hmfbdskx.png" alt="风格化校园图1">
+            <!-- AI场景风格化引擎 - 自研工厂 -->
+            <div id="ai-campus-engine" style="margin-top: 80px;">
+                <div class="ai-engine-grid">
+                    <!-- 左列：技术说明 -->
+                    <div class="ai-engine-description">
+                        <h3 class="ai-engine-title">自研 AI 场景风格化引擎</h3>
+                        <p class="ai-engine-subtitle">Zero-Shot Style Transfer</p>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">AI Studio驱动</span>
+                            <span class="tech-tag">无需LoRA训练</span>
+                            <span class="tech-tag">NanoBanana模型</span>
+                            <span class="tech-tag">秒级生成</span>
+                        </div>
+                        
+                        <p class="ai-engine-text">
+                            我们没有使用传统的LoRA微调方案（需要收集大量样本图、标注、训练，成本高昂且耗时）。
+                            而是<strong>直接接入Google AI Studio API</strong>，通过精心设计的提示词工程，实现对校园场景的即时风格迁移。
+                        </p>
+                        
+                        <blockquote class="developer-note">
+                            <div class="note-icon">💡</div>
+                            <div>
+                                <strong>开发者备注：</strong><br>
+                                相比传统AI绘画方案（如Midjourney API、Stable Diffusion训练），
+                                使用Google AI Studio的<span class="cost-highlight">成本降低90%</span>，
+                                且无需GPU资源，只需优化Prompt即可批量生成符合品牌风格的校园素材。
+                            </div>
+                        </blockquote>
                     </div>
-                    <div class="campus-image">
-                        <img src="ai风格化校园图图集/风格化后/wild-journey-drnquhtgq.png" alt="风格化校园图2">
-                    </div>
-                    <div class="campus-image">
-                        <img src="ai风格化校园图图集/风格化后/wild-journey-hc856zufk.png" alt="风格化校园图3">
+                    
+                    <!-- 右列：MacBook样机 + 工具演示 -->
+                    <div class="ai-engine-demo">
+                        <div class="macbook-mockup">
+                            <div class="macbook-screen">
+                                <img src="ai风格化校园图工具操作示例.png" alt="AI工具操作界面" class="demo-screenshot">
+                                <div class="scan-line"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div style="margin-top: 32px; text-align: center;">
-                    <img src="ai风格化校园图工具操作示例.png" alt="AI工具操作示例" style="max-width: 600px; width: 100%; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.4);">
-                    <p style="margin-top: 16px; font-size: 14px; color: rgba(255,255,255,0.5);">AI风格化工具操作界面示例</p>
+                <!-- 底部：无限滚动图片展示 -->
+                <div class="infinite-scroll-container">
+                    <div class="infinite-scroll-track">
+                        <!-- 第一组 -->
+                        <div class="polaroid-card">
+                            <img src="ai风格化校园图图集/风格化后/wild-journey-8hmfbdskx.png" alt="风格化场景1">
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="ai风格化校园图图集/风格化后/wild-journey-drnquhtgq.png" alt="风格化场景2">
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="ai风格化校园图图集/风格化后/wild-journey-hc856zufk.png" alt="风格化场景3">
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="ai风格化校园图图集/风格化后/wise-journey-e34k5ck61.png" alt="风格化场景4">
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="ai风格化校园图图集/风格化后/wise-journey-nxmthipzp.png" alt="风格化场景5">
+                        </div>
+                        
+                        <!-- 重复一组实现无缝循环 -->
+                        <div class="polaroid-card">
+                            <img src="ai风格化校园图图集/风格化后/wild-journey-8hmfbdskx.png" alt="风格化场景1">
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="ai风格化校园图图集/风格化后/wild-journey-drnquhtgq.png" alt="风格化场景2">
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="ai风格化校园图图集/风格化后/wild-journey-hc856zufk.png" alt="风格化场景3">
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="ai风格化校园图图集/风格化后/wise-journey-e34k5ck61.png" alt="风格化场景4">
+                        </div>
+                        <div class="polaroid-card">
+                            <img src="ai风格化校园图图集/风格化后/wise-journey-nxmthipzp.png" alt="风格化场景5">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-footer">
+                    <span>Powered by Google AI Studio API</span>
+                    <span class="divider">|</span>
+                    <span>Model: NanoBanana</span>
+                    <span class="divider">|</span>
+                    <span>Latency: &lt;2s</span>
                 </div>
             </div>
         </div>
@@ -2503,62 +4172,132 @@
             });
         });
         
-        // 管理后台板块 - 滚动视差动画
-        document.addEventListener('DOMContentLoaded', () => {
-            // Intersection Observer for fade-up animations
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const animateOnScroll = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, observerOptions);
-            
-            // 观察所有 bento-card
-            const bentoCards = document.querySelectorAll('.bento-card');
-            bentoCards.forEach(card => {
-                animateOnScroll.observe(card);
-            });
-            
-            // 数字滚动效果
-            const counterNumbers = document.querySelectorAll('.counter-number');
-            let hasAnimated = false;
-            
-            const counterObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !hasAnimated) {
-                        hasAnimated = true;
-                        animateCounters();
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            counterNumbers.forEach(counter => {
-                counterObserver.observe(counter);
-            });
-            
-            function animateCounters() {
-                counterNumbers.forEach(counter => {
-                    const target = parseFloat(counter.getAttribute('data-target'));
-                    const duration = 2000; // 2秒
-                    const step = target / (duration / 16); // 60fps
-                    let current = 0;
+        // Lightbox 灯箱功能
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        
+        // 打开灯箱
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            if (img) {
+                lightbox.style.display = 'flex';
+                lightbox.style.opacity = '0';
+                lightboxImg.src = img.src;
+                
+                // 淡入动画
+                setTimeout(() => {
+                    lightbox.style.opacity = '1';
+                }, 10);
+            }
+        }
+        
+        // 关闭灯箱
+        function closeLightbox() {
+            lightbox.style.opacity = '0';
+            setTimeout(() => {
+                lightbox.style.display = 'none';
+            }, 300);
+        }
+        
+        // 点击背景关闭
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+        
+        // ESC键关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+                closeLightbox();
+            }
+        });
+        
+        // 滚轮缩放（可选功能）
+        let scale = 1;
+        lightboxImg.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+            scale = Math.max(0.5, Math.min(3, scale + delta));
+            lightboxImg.style.transform = `scale(${scale})`;
+        });
+        
+        // 重置缩放当关闭时
+        const originalCloseLightbox = closeLightbox;
+        closeLightbox = function() {
+            scale = 1;
+            lightboxImg.style.transform = 'scale(1)';
+            originalCloseLightbox();
+        };
+        
+        // 放大镜效果
+        document.querySelectorAll('.magnify-container').forEach(container => {
+            const lens = container.querySelector('.magnify-lens');
+            if (lens) {
+                container.addEventListener('mousemove', function(e) {
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left - 75; // 75 = lens width / 2
+                    const y = e.clientY - rect.top - 75;
                     
-                    const timer = setInterval(() => {
-                        current += step;
-                        if (current >= target) {
-                            counter.textContent = target.toFixed(1);
-                            clearInterval(timer);
-                        } else {
-                            counter.textContent = current.toFixed(1);
-                        }
-                    }, 16);
+                    lens.style.left = x + 'px';
+                    lens.style.top = y + 'px';
                 });
+            }
+        });
+        
+        // 视频模态框控制
+        const videoModal = document.getElementById('videoModal');
+        const videoPlayer = document.getElementById('videoPlayer');
+        
+        function openVideoModal() {
+            // B站嵌入式播放器链接（第4集）
+            const videoUrl = 'https://player.bilibili.com/player.html?bvid=BV1SKSWBgEYy&page=4&autoplay=1&muted=0&high_quality=1';
+            videoPlayer.src = videoUrl;
+            videoModal.style.display = 'block';
+            setTimeout(() => {
+                videoModal.classList.add('show');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+        
+        function closeVideoModal() {
+            videoModal.classList.remove('show');
+            setTimeout(() => {
+                videoModal.style.display = 'none';
+                videoPlayer.src = ''; // 停止播放
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+        
+        // 点击模态框外部关闭
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                closeVideoModal();
+            }
+        });
+        
+        // ESC键关闭视频
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && videoModal.style.display === 'block') {
+                closeVideoModal();
+            }
+        });
+        
+        // 关闭lightbox
+        lightboxClose.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+        
+        // ESC键关闭
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+                lightbox.style.display = 'none';
             }
         });
     </script>
